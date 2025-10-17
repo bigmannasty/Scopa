@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "card.h"
 
 class deck {
 	
@@ -11,6 +12,8 @@ public:
  int indexFilled[40] = {};
  int topCard = 0;
  
+ deck();
+
  //initialise the deck by randomly generating the cards within ranges
  void initDeck();
  

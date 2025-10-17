@@ -1,6 +1,6 @@
 #include "game.h"
 
-game(int gameNum) {
+game::game(int gameNum) {
 	this->gameNum = gameNum;
 	this->roundNum = 1;
 	deck1.initDeck();
@@ -9,7 +9,7 @@ game(int gameNum) {
 	}
 }
 
-void turn(player* player) {
+void game::turn(player* player) {
 	//first try to take
 	for (int i = 0; i < 10; i++) { //going through each prio
 		for (int j = 0; j < 3; j++) { //going through each card in the hand 
@@ -39,7 +39,7 @@ void turn(player* player) {
 }
 
 
-void round() {
+void game::round() {
 	
 	for (int i = 0; i < 4; i++) { //each player draw cards
 		players[i]->drawCards(&deck1);

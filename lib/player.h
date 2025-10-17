@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "card.h"
+#include "deck.h"
 
 class player {
  public:
@@ -14,6 +15,8 @@ class player {
 	int topCollectedIndex = 0;
 	int numOfSweeps = 0;
 	
+	player(int playerNum);
+
 	//draw 3 cards from the given deck
 	void drawCards(deck* theDeck);
 	

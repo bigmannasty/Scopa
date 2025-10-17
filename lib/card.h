@@ -9,6 +9,8 @@ public:
 	char suit;
 	int num;
 
+	card(char suit, int num);
+
 	//return the suit of the given card; i wrote the below comment first so refer to that for additional info
 	char getSuit();
 

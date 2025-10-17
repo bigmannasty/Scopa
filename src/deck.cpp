@@ -1,9 +1,9 @@
 #include "deck.h"
 
-deck() {}
+deck::deck() {}
 
 //initialise the deck by randomly generating the cards within ranges
-void initDeck() {
+void deck::initDeck() {
 	//cards = {};
 	int suitsGend[4] = {};
 	char suit;
@@ -51,20 +51,20 @@ void initDeck() {
 }
  
 //return a card from the top of the deck
-	card* drawCard() {
+card* deck::drawCard() {
 	card* drawnCard = cards[topCard];
 	topCard++;
 	return drawnCard;
 }
 
 //print the top card; only used it in debugging, dont think its useful for anything else
-	void peekTop() {
+void deck::peekTop() {
 	cards[topCard]->printCard();
 	return;
 }
 
 //print the cards currently in the deck
-void printCards() {
+void deck::printCards() {
 	printf("PRINT CARDS");
 	for (int i = topCard; i < 40; i++) {
 		cards[i]->printCard();

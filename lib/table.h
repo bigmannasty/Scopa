@@ -3,12 +3,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "card.h"
+#include "deck.h"
+#include "player.h"
 
 class table {
  public:
 	card* cardsOnTable[10] = {};
 	int totalCards = 0;
 	
+	table();
+
 	//deal the cards onto the table at the start of the round
 	void firstRoundCards(deck* theDeck);
 	

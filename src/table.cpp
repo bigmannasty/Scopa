@@ -1,29 +1,29 @@
 #include "table.h"
 
-table() {}
+table::table() {}
 
-void firstRoundCards(deck* theDeck) {
+void table::firstRoundCards(deck* theDeck) {
 	for (int i = 0; i < 4; i++) {
 		cardsOnTable[i] = theDeck->drawCard();
 	}
 	totalCards = 4;
 }
 
-card* take(int tableIndex) {
+card* table::take(int tableIndex) {
 	card* cardTaken = cardsOnTable[tableIndex];
 	cardsOnTable[tableIndex] = NULL;
 	totalCards -= 1;
 	return cardTaken;
 }
 
-void aceTake(player* takingPlayer) {
+void table::aceTake(player* takingPlayer) {
 	for (int i = 0; i < 10; i++) {
 		if (cardsOnTable[i] != NULL) { takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(i); takingPlayer->topCollectedIndex++; }
 	}
 	totalCards = 0;
 }
 
-int takeWith(card* takingCard, player* takingPlayer) {
+int table::takeWith(card* takingCard, player* takingPlayer) {
 	int takeVal = takingCard->num;
 	for (int i = 0; i < 10; i++) {
 		if (cardsOnTable[i] != NULL && cardsOnTable[i]->getNum() == takeVal) {
@@ -41,13 +41,13 @@ int takeWith(card* takingCard, player* takingPlayer) {
 	return 0;
 }
 
-void playCard(card* playedCard) {
+void table::playCard(card* playedCard) {
 	for (int i = 0; i < 10; i++) {
 		if (cardsOnTable[i] == NULL) { cardsOnTable[i] = playedCard; totalCards += 1; return; }
 	}
 }
 
-void printTable() {
+void table::printTable() {
 	for (int i = 0; i < 10; i++) {
 		if (cardsOnTable[i] != NULL) cardsOnTable[i]->printCard();
 	}
