@@ -1,4 +1,5 @@
 #include "table.h"
+#include <assert.h>
 
 table::table() {}
 
@@ -10,10 +11,10 @@ void table::firstRoundCards(deck* theDeck) {
 }
 
 card* table::take(int tableIndex) {
-	printf("TAKE CALL");
 	card* cardTaken = cardsOnTable[tableIndex]; //set the taken card to the current table index
 	cardsOnTable[tableIndex] = NULL; //set the table index to null
 	totalCards -= 1; //drop the total cards on the table
+	assert(totalCards >= 0);
 	return cardTaken; //send out the card that was taken
 }
 
@@ -25,27 +26,25 @@ void table::aceTake(player* takingPlayer) {
 }
 
 int table::takeWith(card* takingCard, player* takingPlayer) {
-	printf("\nTAKE WITH CALL\n");
-	int takeVal = takingCard->num; //value of the taking card 
-	for (int i = 0; i < 10; i++) { //for all the cards on the table
-		printf("\nSEARCH LOOP 1 INDEX %i\n", i);
-		printf("HERE I AM");
+	//printf("\nTAKE WITH CALL\n");
+	int takeVal = takingCard->getNum(); //value of the taking card 
+	for (int i = 0; cardsOnTable[i] != NULL; i++) { //for all the cards on the table
+		//printf("\nSEARCH LOOP 1 INDEX %i\n", ii);
 		if (cardsOnTable[i]->getNum() == takeVal) { //if the card in the current index is not null and the values are same
-			printf("TOPCOLLECTED %i", takingPlayer->topCollectedIndex);
+			printf("\nTake %c%d  With %c%d\n", cardsOnTable[i]->getSuit(), takeVal, takingCard->getSuit(), takeVal); //print for debug
 			takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(i); //take it!!!
 			takingPlayer->topCollectedIndex++; //bump up that topcollected
-			printf("\nTake %c%d  With %c%d\n", cardsOnTable[i]->getSuit(), takeVal, takingCard->getSuit(), takeVal); //print for debug
 			return 1;
 		}
 	}
 	
 	if (takeVal == 1) { //take everything if you have an ace
-		printf("\nACE TAKE\n");
+		//printf("\nACE TAKE\n");
 		aceTake(takingPlayer);
 		return 1;
 	}
 
-	/*for (int add1 = 0; cardsOnTable[add1] != NULL; add1++) { //for every card on the table
+	for (int add1 = 0; cardsOnTable[add1] != NULL; add1++) { //for every card on the table
 		card* add1Card = cardsOnTable[add1];
 		int add1Val = add1Card->getNum(); //get value of the current index card
 		for (int add2 = 0; cardsOnTable[add2] != NULL; add2++) { //for every other card on the table
@@ -58,22 +57,23 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); 
 				takingPlayer->topCollectedIndex++; 
 				return 1;
-			}
-				
+			}		
 		}
+	}
 
-	}*/
-	
-	printf("\nTOOK NONE\n");
+	//printf("\nTOOK NONE\n");
 
 	return 0;
+
 }
+
 
 void table::playCard(card* playedCard) {
 	for (int i = 0; i < 10; i++) { //place a card on the table at the next empty index
 		if (cardsOnTable[i] == NULL) { cardsOnTable[i] = playedCard; totalCards += 1; return; }
 	}
 }
+
 
 void table::sortTable() {
 	int emptySpace = 0;
@@ -90,8 +90,11 @@ void table::sortTable() {
 	}
 }
 
+
 void table::printTable() {
+	printf("\nTABLE :\t");
 	for (int i = 0; i < 10; i++) { //print for every index
 		if (cardsOnTable[i] != NULL) cardsOnTable[i]->printCard();
 	}
+	printf("\n");
 }
