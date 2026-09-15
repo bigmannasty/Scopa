@@ -1,6 +1,7 @@
-Script started on 2026-09-15 22:43:58+00:00 [COMMAND="./main" TERM="linux" TTY="/dev/tty1" COLUMNS="160" LINES="50"]
+Script started on 2026-09-15 23:38:21+00:00 [COMMAND="./main" TERM="linux" TTY="/dev/tty1" COLUMNS="160" LINES="50"]
 
 Player 1 : 0	Player 2 : 0	Player 3 : 0	Player 4 : 0	
+
 
 TABLE :		B9	S4	S1	B6
 
@@ -12,6 +13,7 @@ Player 2 Hand:	B2	G3	S8
 Player 3 Hand:	G7	G10	C5
 Take S5  With C5
 
+
 TABLE :		B6	S4	S8
 
 Player 0 Hand:	C1	B10
@@ -22,6 +24,7 @@ Player 2 Hand:	B2	G3
 Player 3 Hand:	G7	G10
 Take C7  With G7
 
+
 TABLE :		S8	B2
 
 Player 0 Hand:	C1
@@ -30,13 +33,13 @@ Player 2 Hand:	G3
 Player 3 Hand:	G10
 Take S7 and G3 With G10
 
-TABLE :	
+EMPTY TABLE
 
-TABLE :	
+EMPTY TABLE
 
 END ROUND
 
-TABLE :	
+EMPTY TABLE
 
 Player 0 Hand:	S6	G4	C9
 Player 1 Hand:	G5	S9	B7
@@ -46,13 +49,14 @@ Player 2 Hand:	C3	C8	B3
 Player 3 Hand:	B4	B8	G1
 Take C8  With B8
 
-TABLE :	
+EMPTY TABLE
 
 Player 0 Hand:	S6	G4
 Player 1 Hand:	G5	B7
 Player 2 Hand:	C3	B3
 Player 3 Hand:	B4	G1
 Take G4  With B4
+
 
 TABLE :		C3	G5
 
@@ -62,18 +66,19 @@ Player 2 Hand:	B3
 Take C3  With B3
 
 Player 3 Hand:	G1
-TABLE :	
+EMPTY TABLE
 
-TABLE :	
+EMPTY TABLE
 
 END ROUND
 
-TABLE :	
+EMPTY TABLE
 
 Player 0 Hand:	C4	G9	S3
 Player 1 Hand:	C2	S2	B1
 Player 2 Hand:	G8	C6	B5
 Player 3 Hand:	S10	G2	G6
+
 TABLE :		G8	S10
 
 Player 0 Hand:	C4	S3
@@ -82,6 +87,7 @@ Player 2 Hand:	C6	B5
 Take S3 and C2 With B5
 
 Player 3 Hand:	G2	G6
+
 TABLE :		G8	S10	G2
 
 Player 0 Hand:	C4
@@ -92,12 +98,21 @@ Player 2 Hand:	C6
 Player 3 Hand:	G6
 Take C6  With G6
 
+
 TABLE :		G8	S10	C4
 
-TABLE :	
+EMPTY TABLE
 
 END ROUND
 
-Player 1 : 0	Player 2 : 0	Player 3 : 0	Player 4 : 2	
+PLAYER 0	B9	S1	C10	B6	S4	B10	S8	B2	C1
 
-Script done on 2026-09-15 22:43:58+00:00 [COMMAND_EXIT_CODE="0"]
+PLAYER 1	C9	S9	G9	B1	G2	S2
+
+PLAYER 2	C3	B3	S3	C2	B5
+
+PLAYER 3	S5	C5	C7	G7	S7	G3	G10	C8	B8	G4	B4	B7	G5	S6	G1	C6	G6	G8	S10	C4
+
+Player 1 : 0	Player 2 : 0	Player 3 : 0	Player 4 : 4	
+
+Script done on 2026-09-15 23:38:21+00:00 [COMMAND_EXIT_CODE="0"]

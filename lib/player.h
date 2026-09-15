@@ -22,6 +22,9 @@ class player {
 	
 	//display the cards in the given player's hand
 	void printHand();
+
+	//display cards collected by this player
+	void printCollected();
 };
 
 #endif

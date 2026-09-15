@@ -21,6 +21,12 @@ int main() {
 		game1.round();
 	}
 
+	for (int i = 0; i < 4; i++) {
+		printf("\nPLAYER %i", i);
+		game1.players[i]->printCollected();
+		printf("\n");
+	}
+
 	SB.scoring();
 
 	SB.printScores();

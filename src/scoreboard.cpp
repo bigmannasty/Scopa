@@ -81,6 +81,15 @@ int scoreboard::getMaxGolds() {
 	else return 99; //bug - no tie but no max either
 }
 
+//TODO
+int scoreboard::primera() {
+	for (int playerNo = 0; playerNo < 4; playerNo++) {
+		thisGame->players[playerNo]
+	}
+
+	return playerPrimera; //return number of the player with highest primera
+}
+
 void scoreboard::scoring() {
 	for (int i = 0; i < 4; i++) { //call player scorings for each
 		countPlayerScore(i);
@@ -97,6 +106,8 @@ void scoreboard::scoring() {
 	if (maxGoldPlayer != 5) {
 		scores[maxGoldPlayer] += 1;
 	}
+
+
 
 
 }

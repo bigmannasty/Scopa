@@ -26,7 +26,7 @@ void table::aceTake(player* takingPlayer) {
 }
 
 int table::takeWith(card* takingCard, player* takingPlayer) {
-	//printf("\nTAKE WITH CALL\n");
+	//checking for direct single value
 	int takeVal = takingCard->getNum(); //value of the taking card 
 	for (int i = 0; cardsOnTable[i] != NULL; i++) { //for all the cards on the table
 		//printf("\nSEARCH LOOP 1 INDEX %i\n", ii);
@@ -38,28 +38,61 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 		}
 	}
 	
+	//checking for an ace take
 	if (takeVal == 1) { //take everything if you have an ace
 		//printf("\nACE TAKE\n");
 		aceTake(takingPlayer);
 		return 1;
 	}
+	
+	if (totalCards < 2) { return 0; } //if theres less than 3 cards on the table then the rest of this is useless
 
+	//checking for a possible combo of 2 cards
 	for (int add1 = 0; cardsOnTable[add1] != NULL; add1++) { //for every card on the table
 		card* add1Card = cardsOnTable[add1];
 		int add1Val = add1Card->getNum(); //get value of the current index card
-		for (int add2 = 0; cardsOnTable[add2] != NULL; add2++) { //for every other card on the table
+		for (int add2 = add1 + 1; cardsOnTable[add2] != NULL; add2++) { //for every other card on the table
 			card* add2Card = cardsOnTable[add2];
 			int add2Val = add2Card->getNum(); 
 			if (add1 != add2 && takeVal == (add1Val + add2Val)) { //if they add together then take propabley
 				printf("\nTake %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, takingCard->getSuit(), takeVal); //print for debug
-				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add1); 
-				takingPlayer->topCollectedIndex++; 
-				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); 
+				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add1); //take the first 
+				takingPlayer->topCollectedIndex++;
+				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); //take the second
 				takingPlayer->topCollectedIndex++; 
 				return 1;
 			}		
 		}
 	}
+
+	if (totalCards < 2) { return 0; } //if theres less than 3 cards on the table then the rest of this is useless
+	
+	//checking for a combo of 3 cards
+	for (int add1 = 0; cardsOnTable[add1] != NULL; add1++) {
+		card* add1Card = cardsOnTable[add1];
+		int add1Val = add1Card->getNum(); //get value of the current index card
+		for (int add2 = add1 + 1; cardsOnTable[add2] != NULL; add2++) { //for every other card on the table
+			card* add2Card = cardsOnTable[add2];
+			int add2Val = add2Card->getNum(); 
+			int total12 = add1Val + add2Val;
+			for (int add3 = add2 + 1; cardsOnTable[add3] != NULL; add3++) { //for every other card on the table
+				card* add3Card = cardsOnTable[add3];
+				int add3Val = add3Card->getNum();
+				if (takeVal == (total12 + add3Val)) {
+					printf("\nTake %c%d and %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, add3Card->getSuit(), add3Val, takingCard->getSuit(), takeVal); //print for debug
+					takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add1); //take the first 
+					takingPlayer->topCollectedIndex++;
+					takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); //take the second
+					takingPlayer->topCollectedIndex++; 
+					takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add3); //take the third
+					takingPlayer->topCollectedIndex++; 
+					return 1;
+				}
+			}
+
+		}
+	}
+
 
 	//printf("\nTOOK NONE\n");
 
@@ -92,7 +125,8 @@ void table::sortTable() {
 
 
 void table::printTable() {
-	printf("\nTABLE :\t");
+	if (cardsOnTable[0] == NULL) { printf("\nEMPTY TABLE\n"); return; } //if the table empty
+	printf("\n\nTABLE :\t");
 	for (int i = 0; i < 10; i++) { //print for every index
 		if (cardsOnTable[i] != NULL) cardsOnTable[i]->printCard();
 	}

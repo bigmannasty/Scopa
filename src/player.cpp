@@ -16,3 +16,9 @@ void player::printHand() {
 		if (hand[i] != NULL) hand[i]->printCard();
 	}
 }
+
+void player::printCollected() {
+	for (int i = 0; collectedCards[i] != NULL; i++) {
+		collectedCards[i]->printCard();
+	}
+}

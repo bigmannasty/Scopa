@@ -17,7 +17,8 @@ void game::turn(player* player) {
 			//printf("  PRIO %i HANDPOS %i  ", i, j);
 			if (player->hand[j] != NULL && player->hand[j]->getNum() == cardPrio[i]) {
 				if (tab.takeWith(player->hand[j], player) == 1) { 
-					player->collectedCards[player->topCollectedIndex] = player->hand[j]; 
+					player->collectedCards[player->topCollectedIndex] = player->hand[j]; //transfer from hand to collected pile
+					player->topCollectedIndex += 1; //increment topcollected : was a bug until i gained sentience 
 					player->hand[j] = NULL; 
 					lastToTake = player; 
 					return; 
@@ -75,7 +76,6 @@ void game::round() {
 				tab.cardsOnTable[i] = NULL;
 			}
 		}
-		//tab.cardsOnTable = {};
 	}
 	tab.printTable();
 	printf("\nEND ROUND\n");
