@@ -29,7 +29,10 @@ class table {
 	
 	//add a card to the table
 	void playCard(card* playedCard);
-	
+
+	//sort the cards on the table by filling gaps in the front by starting from the back
+	void sortTable();
+
 	//print all the cards currently on the table
 	void printTable();
 	

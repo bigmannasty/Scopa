@@ -4,14 +4,26 @@
 #include "deck.h"
 #include "player.h"
 #include "game.h"
+#include "scoreboard.h"
 
 int main() {
 	srand(1000);
-	
+
+	scoreboard SB;	
+
 	game game1(1);
+
+	SB.setGame(&game1);
+
+	SB.printScores();
+
 	for (int roundNum = 0; roundNum < 3; roundNum++) {
 		game1.round();
 	}
+
+	SB.scoring();
+
+	SB.printScores();
 	
 	return 0;
 
