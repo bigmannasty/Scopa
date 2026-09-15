@@ -25,7 +25,7 @@ void game::turn(player* player) {
 			}
 		}
 	}
-	printf("\nno take\n");
+	printf("\nNO TAKE\n");
 	
 	//if cant take, play the "least valuable card"
 	for (int i = 9; i >= 0; i--) {

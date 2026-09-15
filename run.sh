@@ -6,4 +6,4 @@ find -maxdepth 1 -name '*.o' ! -name 'main.o' -print0 | xargs -0 mv -t lib/
 g++ main.o lib/*.o -o main
 rm -f main.o
 chmod +x main
-./main
+script -q -c "./main" session.log

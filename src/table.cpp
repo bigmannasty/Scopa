@@ -26,10 +26,12 @@ void table::aceTake(player* takingPlayer) {
 
 int table::takeWith(card* takingCard, player* takingPlayer) {
 	printf("\nTAKE WITH CALL\n");
-	int takeVal = takingCard->getNum(); //value of the taking card 
-	for (int i = 0; cardsOnTable[i] != NULL; i++) { //for all the cards on the table
-		printf("\nSEARCH LOOP 1 %i\n", i);
-		if (cardsOnTable[i] != NULL && cardsOnTable[i]->getNum() == takeVal) { //if the card in the current index is not null and the values are same
+	int takeVal = takingCard->num; //value of the taking card 
+	for (int i = 0; i < 10; i++) { //for all the cards on the table
+		printf("\nSEARCH LOOP 1 INDEX %i\n", i);
+		printf("HERE I AM");
+		if (cardsOnTable[i]->getNum() == takeVal) { //if the card in the current index is not null and the values are same
+			printf("TOPCOLLECTED %i", takingPlayer->topCollectedIndex);
 			takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(i); //take it!!!
 			takingPlayer->topCollectedIndex++; //bump up that topcollected
 			printf("\nTake %c%d  With %c%d\n", cardsOnTable[i]->getSuit(), takeVal, takingCard->getSuit(), takeVal); //print for debug
@@ -62,7 +64,7 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 
 	}*/
 	
-	printf("\ntake with done\n");
+	printf("\nTOOK NONE\n");
 
 	return 0;
 }
