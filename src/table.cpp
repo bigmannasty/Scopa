@@ -29,9 +29,9 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 	//checking for direct single value
 	int takeVal = takingCard->getNum(); //value of the taking card 
 	for (int i = 0; cardsOnTable[i] != NULL; i++) { //for all the cards on the table
-		//printf("\nSEARCH LOOP 1 INDEX %i\n", ii);
+		if (DEBUG == 1) printf("\nSEARCH LOOP 1 INDEX %i\n", i);
 		if (cardsOnTable[i]->getNum() == takeVal) { //if the card in the current index is not null and the values are same
-			printf("\nTake %c%d  With %c%d\n", cardsOnTable[i]->getSuit(), takeVal, takingCard->getSuit(), takeVal); //print for debug
+			if (DEBUG == 1) printf("\nTake %c%d  With %c%d\n", cardsOnTable[i]->getSuit(), takeVal, takingCard->getSuit(), takeVal); //print for debug
 			takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(i); //take it!!!
 			takingPlayer->topCollectedIndex++; //bump up that topcollected
 			return 1;
@@ -40,9 +40,9 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 	
 	//checking for an ace take
 	if (takeVal == 1) { //take everything if you have an ace
-		//printf("\nACE TAKE\n");
+		if (DEBUG == 1) printf("\nACE TAKE\n");
 		aceTake(takingPlayer);
-		return 1;
+		return 2; //to know to differentiate between ace sweep and regular sweep 
 	}
 	
 	if (totalCards < 2) { return 0; } //if theres less than 3 cards on the table then the rest of this is useless
@@ -55,7 +55,7 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 			card* add2Card = cardsOnTable[add2];
 			int add2Val = add2Card->getNum(); 
 			if (add1 != add2 && takeVal == (add1Val + add2Val)) { //if they add together then take propabley
-				printf("\nTake %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, takingCard->getSuit(), takeVal); //print for debug
+				if (DEBUG == 1) printf("\nTake %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, takingCard->getSuit(), takeVal); //print for debug
 				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add1); //take the first 
 				takingPlayer->topCollectedIndex++;
 				takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); //take the second
@@ -79,7 +79,7 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 				card* add3Card = cardsOnTable[add3];
 				int add3Val = add3Card->getNum();
 				if (takeVal == (total12 + add3Val)) {
-					printf("\nTake %c%d and %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, add3Card->getSuit(), add3Val, takingCard->getSuit(), takeVal); //print for debug
+					if (DEBUG == 1) printf("\nTake %c%d and %c%d and %c%d With %c%d\n", add1Card->getSuit(), add1Val, add2Card->getSuit(), add2Val, add3Card->getSuit(), add3Val, takingCard->getSuit(), takeVal); //print for debug
 					takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add1); //take the first 
 					takingPlayer->topCollectedIndex++;
 					takingPlayer->collectedCards[takingPlayer->topCollectedIndex] = take(add2); //take the second
@@ -94,7 +94,7 @@ int table::takeWith(card* takingCard, player* takingPlayer) {
 	}
 
 
-	//printf("\nTOOK NONE\n");
+	if (DEBUG == 1) printf("\nTOOK NONE\n");
 
 	return 0;
 

@@ -7,31 +7,41 @@
 #include "scoreboard.h"
 
 int main() {
-	srand(1000);
+		
+	int startSeed = 1000;
+	int endSeed = 1000;
 
-	scoreboard SB;	
+	for (int ranseed = startSeed; ranseed <= endSeed; ranseed += 100) {
+		srand(ranseed);
 
-	game game1(1);
+		scoreboard SB;	
 
-	SB.setGame(&game1);
+		for (int gameNum = 0; gameNum < 100; gameNum++) {
+			game game1(gameNum);
+			SB.setGame(&game1);
+			if (DEBUG == 1) SB.printScores();
 
-	SB.printScores();
+			for (int roundNum = 0; roundNum < 3; roundNum++) {
+				game1.round();
+			}
 
-	for (int roundNum = 0; roundNum < 3; roundNum++) {
-		game1.round();
+			if (DEBUG == 1) {
+				for (int i = 0; i < 4; i++) {
+					printf("\nPLAYER %i", i);
+					game1.players[i]->printCollected();
+					printf("\n");
+				}
+			}
+		
+
+			SB.scoring();
+			if (DEBUG==1) SB.printScores();
+		}
+
+		SB.printScores();
 	}
 
-	for (int i = 0; i < 4; i++) {
-		printf("\nPLAYER %i", i);
-		game1.players[i]->printCollected();
-		printf("\n");
-	}
-
-	SB.scoring();
-
-	SB.printScores();
 	
 	return 0;
-
 
 }
