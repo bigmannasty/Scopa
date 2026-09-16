@@ -81,13 +81,75 @@ int scoreboard::getMaxGolds() {
 	else return 99; //bug - no tie but no max either
 }
 
-//TODO
+int scoreboard::cardValToPrimera(int cardVal) {
+	assert(cardVal > 0 && cardVal < 11); //make sure cardVal is within range
+	switch(cardVal) { //switch for all values 1-10
+		case 7:
+			return 21;
+		case 6:
+			return 18;
+		case 1:
+			return 16;
+		case 8:
+		case 9:
+		case 10:
+			return 10; //return 10 if 8,9,10
+		default:
+			return (cardVal + 10); //return sum of cardVal and 10 when 2-5
+	}
+}
+
+
 int scoreboard::primera() {
-	for (int playerNo = 0; playerNo < 4; playerNo++) {
-		thisGame->players[playerNo]
+	int primeraPlayer = 0; //player index with primera
+	int highestPrimera = 0; //current highest primera
+	int tie = 0;
+	for (int playerNo = 0; playerNo < 4; playerNo++) { //for each player
+		player* currPlayer = thisGame->players[playerNo]; //get player pointer
+		int playerPrimera[] = {0, 0, 0, 0}; //array of each primera slot for current player
+		for (int currCard = 0; currCard < currPlayer->topCollectedIndex; currCard++) { //go thorugh player's collected
+			int suitIndex = 0;
+			switch (currPlayer->collectedCards[currCard]->getSuit()) {
+				case 'G':
+					break;
+
+				case 'S':
+					suitIndex = 1;
+					break;
+
+				case 'B':
+					suitIndex = 2;
+					break;
+
+				case 'C':
+					suitIndex = 3;
+					break;
+			}
+			int primeraVal = cardValToPrimera(currPlayer->collectedCards[currCard]->getNum()); //get value of card's primera
+			if (primeraVal > playerPrimera[suitIndex]) {
+				playerPrimera[suitIndex] = primeraVal; //set value of card's primera in the primera for current player
+		
+			}
+		}
+		int primeraTotal = 0;
+		for (int i = 0; i < 4; i++) {
+			primeraTotal += playerPrimera[i]; //tally up all current player's primera
+		}
+		assert(primeraTotal >= 0 && primeraTotal < 85); //make sure primera isn't negative and not higher than whats possible
+		
+		if (primeraTotal > highestPrimera) { //if this player's primera is higher than the current champ, switch em out
+			primeraPlayer = playerNo;
+			tie = 0;
+		}
+		else if (primeraTotal == highestPrimera) {
+			tie = 1;
+		}
 	}
 
-	return playerPrimera; //return number of the player with highest primera
+
+	if (tie == 0) { return primeraPlayer; } // if no tie return number of the player with highest primera
+	else if (tie == 1) { return 5; } // if tie return 5
+	else { return 99; } //if something wrong then return 99
 }
 
 void scoreboard::scoring() {
@@ -107,7 +169,11 @@ void scoreboard::scoring() {
 		scores[maxGoldPlayer] += 1;
 	}
 
-
-
-
+	int primeraPlayer = primera();
+	assert(primeraPlayer < 6);
+	if (primeraPlayer != 5) {
+		scores[primeraPlayer] += 1;
+	}
+	
+	return;
 }

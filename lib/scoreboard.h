@@ -34,6 +34,12 @@ public:
 	//get scoring info for current player and score for sweeps and K/7 of Gold
 	void countPlayerScore(int playerNum);
 
+	//convert a card's value into primera value
+	int cardValToPrimera(int cardVal);
+
+	//calculate the primeras of each player and return the player with the highest
+	int primera();
+
 	//overall scoring funciton
 	void scoring();
 
